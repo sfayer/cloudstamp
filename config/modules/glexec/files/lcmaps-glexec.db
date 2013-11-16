@@ -1,0 +1,14 @@
+path = /usr/lib64/lcmaps
+
+poolaccount      = "lcmaps_poolaccount.mod"
+                       "-gridmapfile /etc/grid-security/grid-mapfile"
+                       "-gridmapdir /etc/grid-security/gridmapdir"
+                       "-override_inconsistency" 
+
+verify_proxy    = "lcmaps_verify_proxy.mod" 
+                      " -certdir /etc/grid-security/certificates/"
+                      " --allow-limited-proxy"
+
+glexec_get_account:
+verify_proxy -> poolaccount
+

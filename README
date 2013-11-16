@@ -1,0 +1,58 @@
+Cloudstamp Readme
+-----------------
+
+Cloudstamp is a simple system for creating RHEL-like system images for cloud
+systems. The main goal of the project is simplicity for easy maintenance.
+
+Images are created by the following steps:
+ - Create an empty QCOW2 disk image
+ - Install a plain base system using kickstart (inside qemu)
+ - In the kickstart post, apply a puppet catalogue
+ - Compress the disk image
+
+The magic all happens in the puppet step. This is where a plain image gets its
+personality for whatever its intended use is. The base image could even be
+cached but we don't implement that as it's then too complicated to launch
+puppet inside it in an automated & reproducible manner.
+
+The qemu step is done entirely with userspace components, this means that unlike
+other tools, Cloudstamp can run without any elevated privileges on the host
+system.
+
+The requirements on the host system are minimal:
+ - qemu (ideally qemu-kvm but qemu-system-x86_64 works too)
+ - qemu-tools (specifically qemu-img)
+ - bash
+ - A network connection (for downloading packages)
+
+Smoke and mirrors need not apply; everything is driven from a simple bash script
+that runs the commands sequentially and bails out if an error occurs at any step.
+
+If this is the first time your using Cloudstamp, you probably want to just get
+started without worrying about finding installer kernels and things, run the
+bootstrap.sh script to download some to get started with.
+
+Without further a-do, some examples on creating images:
+
+A CentOS6.4, glideinWMS image:
+ ./cloudstamp.sh centos64 glideinwms
+
+A vanilla CentOS5.10 image:
+ ./cloudstamp.sh centos510 base
+
+That's it! Running any of these commands should (eventually, ~5-15 minutes)
+leave you with an image in the output directory. You can then upload this to
+your OpenStack cloud with glance or do whatever with it.
+
+Things to note:
+ - This tool was primarily developed for building RHEL6 glideinWMS images,
+   other configurations aren't as well tested.
+ - The entire config tree is copied into /root on the target system via the
+   initrd. Don't put secrets or anything "too large" in here!
+ - The cloudboot.sh script can be used to boot an image for inspection, you
+   should go into single user mode via grub or things like SSH keys may get
+   permanently written into the image.
+
+If you have any comments, bugs or improvements mail them to sf105@ic.ac.uk
+including "[Cloudstamp]" at the beginning of the subject.
+
