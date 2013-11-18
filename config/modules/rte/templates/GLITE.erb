@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# gLite is already on the path
+# Just set some general grid software variables:
+export VO_CMS_DEFAULT_SE=<%= @close_se %>
+export VO_CMS_SW_DIR="/cvmfs/cms.cern.ch"
+export VO_DTEAM_DEFAULT_SE=<%= @close_se %>
+export VO_DTEAM_SW_DIR="/srv"
+export VO_OPS_DEFAULT_SE=<%= @close_se %>
+export VO_OPS_SW_DIR="/srv"
+export DCACHE_CLIENT_ACTIVE=true
+export SITE_NAME=<%= @site_name %>
+export LCG_GFAL_INFOSYS="<%= @top_bdii %>"
+

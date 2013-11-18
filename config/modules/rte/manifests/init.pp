@@ -1,4 +1,6 @@
-class rte
+class rte($site_name = 'UNKNOWN',
+          $close_se = 'NONE',
+          $top_bdii = 'NONE')
 {
   # Just copy the RTE files
   file {
@@ -19,14 +21,14 @@ class rte
     '/srv/rte/ENV/GLITE':
       ensure => present,
       mode => 755,
-      source => 'puppet:///modules/rte/GLITE',
+      content => template('rte/GLITE.erb'),
       require => File['/srv/rte/ENV'],
   }
   file {
     '/srv/rte/ENV/PROXY':
       ensure => present,
       mode => 755,
-      source => 'puppet:///modules/rte/PROXY',
+      content => template('rte/PROXY.erb'),
       require => File['/srv/rte/ENV'],
   }
 }
