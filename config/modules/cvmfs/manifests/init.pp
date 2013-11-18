@@ -1,5 +1,5 @@
 
-class cvmfs($squid_list)
+class cvmfs($squid_list, $cms_site = 'NONE')
 {
   # Copy the key
   file {
@@ -65,6 +65,15 @@ class cvmfs($squid_list)
       ensure => present,
       content => "/cvmfs /etc/auto.cvmfs\n",
       require => Package['cvmfs'],
+  }
+  # Create the CMS site config if needed
+  if $cms_site != 'NONE' {
+    file {
+      '/etc/cvmfs/config.d/cms.cern.ch.local':
+        ensure => present,
+        content => "export CMS_LOCAL_SITE=$cms_site\n",
+        require => Package['cvmfs'],
+    }
   }
 }
 

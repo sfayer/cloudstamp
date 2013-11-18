@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Do nothing, the X509_USER_PROXY should be configured by condor.
+

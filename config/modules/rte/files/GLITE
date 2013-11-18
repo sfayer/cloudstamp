@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# gLite is already on the path
+# Just set some general grid software variables:
+export VO_CMS_DEFAULT_SE=gfe02.grid.hep.ph.ic.ac.uk
+export VO_CMS_SW_DIR="/cvmfs/cms.cern.ch"
+export VO_DTEAM_DEFAULT_SE=gfe02.grid.hep.ph.ic.ac.uk
+export VO_DTEAM_SW_DIR="/srv"
+export VO_OPS_DEFAULT_SE=gfe02.grid.hep.ph.ic.ac.uk
+export VO_OPS_SW_DIR="/srv"
+export DCACHE_CLIENT_ACTIVE=true
+export SITE_NAME=UKI-LT2-IC-HEP
+export LCG_GFAL_INFOSYS="localbdii.grid.hep.ph.ic.ac.uk:2170"
+
