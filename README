@@ -23,6 +23,7 @@ The requirements on the host system are minimal:
  - qemu (ideally qemu-kvm but qemu-system-x86_64 works too)
  - qemu-tools (specifically qemu-img)
  - bash
+ - lzma
  - A network connection (for downloading packages)
 
 Smoke and mirrors need not apply; everything is driven from a simple bash script
