@@ -28,7 +28,7 @@ The requirements on the host system are minimal:
 Smoke and mirrors need not apply; everything is driven from a simple bash script
 that runs the commands sequentially and bails out if an error occurs at any step.
 
-If this is the first time your using Cloudstamp, you probably want to just get
+If this is the first time you're using Cloudstamp, you probably want to just get
 started without worrying about finding installer kernels and things, run the
 bootstrap.sh script to download some to get started with.
 
