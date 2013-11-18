@@ -1,4 +1,4 @@
-# base.pp: A vanialla install
+# base.pp: A vanilla install
 
 class {
   'vmbase':
