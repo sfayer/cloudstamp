@@ -5,12 +5,12 @@ class glidein
    file {
     '/root/glideinwms-vm-core.rpm':
       ensure => present,
-      source => 'puppet:///modules/glidein/glideinwms-vm-core-0.4-0.2.rc2.el6.noarch.rpm',
+      source => 'puppet:///modules/glidein/glideinwms-vm-core-0.4-0.2.rc2.tmp.el6.noarch.rpm',
    } 
    file {
     '/root/glideinwms-vm-ec2.rpm':
       ensure => present,
-      source => 'puppet:///modules/glidein/glideinwms-vm-ec2-0.4-0.2.rc2.el6.noarch.rpm',
+      source => 'puppet:///modules/glidein/glideinwms-vm-ec2-0.4-0.2.rc2.tmp.el6.noarch.rpm',
    } 
    # Install the RPMs
    package {
