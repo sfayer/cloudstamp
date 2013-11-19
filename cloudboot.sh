@@ -7,7 +7,7 @@ set -e
 INST_MEM=2048
 
 ## Attempt to find a qemu version we can use
-if [ `which qemu-kvm 2>&-` ]; then
+if [ `which qemu-kvm 2>&-` -a -e "/dev/kvm" ]; then
   QEMU_BIN=`which qemu-kvm`
 else
   QEMU_BIN=`which qemu-system-x86_64`
