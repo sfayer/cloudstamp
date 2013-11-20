@@ -79,6 +79,16 @@ class glexec
   pool_user { 'pool7': require => User["pool6"] }
   pool_user { 'pool8': require => User["pool7"] }
   pool_user { 'pool9': require => User["pool8"] }
+  pool_user { 'pool10': require => User["pool9"] }
+  pool_user { 'pool11': require => User["pool10"] }
+  pool_user { 'pool12': require => User["pool11"] }
+  pool_user { 'pool13': require => User["pool12"] }
+  pool_user { 'pool14': require => User["pool13"] }
+  pool_user { 'pool15': require => User["pool14"] }
+  pool_user { 'pool16': require => User["pool15"] }
+  pool_user { 'pool17': require => User["pool16"] }
+  pool_user { 'pool18': require => User["pool17"] }
+  pool_user { 'pool19': require => User["pool18"] }
 
 }
 
