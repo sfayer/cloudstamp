@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# gLite is already on the path, just source the setup script
+source /usr/etc/globus-user-env.sh
+

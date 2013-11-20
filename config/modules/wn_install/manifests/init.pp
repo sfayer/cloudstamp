@@ -1,4 +1,6 @@
-class wn_install
+class wn_install($site_name = 'UNKNOWN',
+                 $close_se = 'NONE',
+                 $top_bdii = 'NONE')
 {
   # Install the grid certs
   file {
@@ -87,6 +89,13 @@ class wn_install
     'emi-wn':
       ensure => present,
       require => Package['emi-release'],
+  }
+  file {
+    '/usr/etc/globus-user-env.sh':
+      ensure => present,
+      mode => 755,
+      content => template('wn_install/globus-user-env.sh.erb'),
+      require => Package['emi-wn'],
   }
 }
 
