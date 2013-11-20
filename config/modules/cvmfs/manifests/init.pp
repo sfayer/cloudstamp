@@ -74,6 +74,20 @@ class cvmfs($squid_list, $cms_site = 'NONE')
         content => "export CMS_LOCAL_SITE=$cms_site\n",
         require => Package['cvmfs'],
     }
+    # The bit below is a hack for our grid site
+    # It makes the CVMFS SITECONF accessible at the normal local path
+    # SITECONF isn't flexible enough to use relative paths or env vars.
+    file {
+      [ '/vols', '/vols/sl5_exp_software', '/vols/sl5_exp_software/cms' ]:
+        ensure => directory,
+        require => Package['cvmfs'],
+    }
+    file {
+      '/vols/sl5_exp_software/cms/SITECONF':
+        ensure => link,
+        target => '/cvmfs/cms.cern.ch/SITECONF',
+        require => File['/vols/sl5_exp_software/cms'],
+    }
   }
 }
 
