@@ -5,18 +5,18 @@
 set -e # Stop on errors
 mkdir -p boot
 
-# CentOS 6.4 (LZMA)
-if [ ! -e boot/centos64_vmlinuz ]; then
-  wget -O boot/centos64_vmlinuz \
-    "http://www.mirrorservice.org/sites/mirror.centos.org/6.4/os/x86_64/images/pxeboot/vmlinuz"
+# CentOS 6.5 (LZMA)
+if [ ! -e boot/centos65_vmlinuz ]; then
+  wget -O boot/centos65_vmlinuz \
+    "http://www.mirrorservice.org/sites/mirror.centos.org/6.5/os/x86_64/images/pxeboot/vmlinuz"
 fi
-if [ ! -e boot/centos64_initrd.img ]; then
-  wget -O boot/centos64_initrd.img.lzma \
-    "http://www.mirrorservice.org/sites/mirror.centos.org/6.4/os/x86_64/images/pxeboot/initrd.img"
-  echo "Recompressing CentOS 6.4 initrd..." >&2
-  unlzma boot/centos64_initrd.img.lzma
-  gzip -9 boot/centos64_initrd.img
-  mv boot/centos64_initrd.img.gz boot/centos64_initrd.img
+if [ ! -e boot/centos65_initrd.img ]; then
+  wget -O boot/centos65_initrd.img.lzma \
+    "http://www.mirrorservice.org/sites/mirror.centos.org/6.5/os/x86_64/images/pxeboot/initrd.img"
+  echo "Recompressing CentOS 6.5 initrd..." >&2
+  unlzma boot/centos65_initrd.img.lzma
+  gzip -9 boot/centos65_initrd.img
+  mv boot/centos65_initrd.img.gz boot/centos65_initrd.img
 fi
 
 # Scientific Linux 6.4 (LZMA)
@@ -60,12 +60,14 @@ if [ ! -e boot/fedora19_initrd.img ]; then
   mv boot/fedora19_initrd.img.gz boot/fedora19_initrd.img
 fi
 
+# TODO: Will these checksums always match? We're recompessing some files and
+#       that's probably dependent on the machine doing the compressing...
 echo "Verifying checksums..." >&2
 sha1sum -c << EOF
 af4add14b6f75dd2e83285247d38b2b7719e2bde  boot/centos510_initrd.img
 a492381a2e5ccea8ae620c498c3e7787948014c8  boot/centos510_vmlinuz
-83431ef78abed96fa8fe744f1efd1c77808b92dc  boot/centos64_initrd.img
-ccdb131af1f97c9d44f9c509b7b4ccf5b046f58e  boot/centos64_vmlinuz
+4c3fcff9f06fa7fae06c45271ced9946073d125f  boot/centos65_initrd.img
+a7a245d687eff671ed5e5b2800f416b696f6715f  boot/centos65_vmlinuz
 62074215b816975c28eb79b355551a34bf6082f6  boot/sl64_initrd.img
 d790f5599e0a7a30183961bab3265e7441f40748  boot/sl64_vmlinuz
 b0d0a0193884a6d734162cf702243a1c993e9d06  boot/fedora19_initrd.img
