@@ -5,3 +5,5 @@ MTU="1500"
 NM_CONTROLLED="yes"
 ONBOOT="yes"
 TYPE="Ethernet"
+# Disable the autoconf routing for openstack
+NOZEROCONF="yes"
