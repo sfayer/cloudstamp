@@ -19,6 +19,7 @@ else
   QEMU_BIN=`which qemu-system-x86_64`
 fi
 GZIP_BIN=`which gzip`
+TEE_BIN=`which tee`
 
 # Check the arguments
 if [ "$#" -ne "2" ]; then
@@ -56,7 +57,8 @@ ${QEMU_BIN} -nographic \
             -initrd ${TMPDIR}/initrd.tmp.gz \
             -append "console=ttyS0 ks=file:/config/ks/${OS_NAME}.cfg ksc=${CONF_NAME}" \
             -drive "file=${TMPDIR}/${IMG_NAME},if=virtio" \
-            -net nic,model=virtio -net user
+            -net nic,model=virtio -net user \
+            | ${TEE_BIN} ${OUTDIR}/${IMG_NAME}.log
 echo "[*] Welcome back... Resetting your console in 3 seconds." >&2
 sleep 3; reset
 echo "[*] Compressing image..." >&2
