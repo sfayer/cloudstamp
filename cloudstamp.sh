@@ -67,4 +67,5 @@ echo "[*] Tidying up..." >&2
 rm -rf ${TMPDIR}
 echo "[*] Complete." >&2
 echo "Your image file is here: ${OUTDIR}/${IMG_NAME}"
+echo "Your build log file is here: ${OUTDIR}/${IMG_NAME}.log"
 
