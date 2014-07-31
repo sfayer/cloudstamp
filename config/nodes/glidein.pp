@@ -7,7 +7,7 @@ class {
 
 class {
   'cvmfs':
-    squid_list => 'http://lt2cache00.grid.hep.ph.ic.ac.uk:3128',
+    squid_list => 'auto',
     cms_site => 'T2_UK_London_IC',
 }
 
