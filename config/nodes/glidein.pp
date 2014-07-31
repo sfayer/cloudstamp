@@ -7,7 +7,7 @@ class {
 
 class {
   'cvmfs':
-    squid_list => 'auto',
+    squid_list => 'auto;DIRECT',
     cms_site => 'T2_UK_London_IC',
 }
 
