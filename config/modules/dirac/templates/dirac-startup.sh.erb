@@ -31,7 +31,7 @@ runuser -c ' \
     -o "/LocalSite/CPUNormalizationFactor=8.8" \
     -o "/DIRAC/Security/CertFile=${X509_USER_CERT}" \
     -o "/DIRAC/Security/KeyFile=${X509_USER_KEY}" ' \
-  dirac
+  dirac 2>&1 | tee /var/log/dirac.log
 popd
 
 # Grace period before shutting down VM
