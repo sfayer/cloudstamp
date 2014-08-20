@@ -76,13 +76,11 @@ class wlcg
                     ]
 
     package {
-      'base_packages':
-        name => $base_packages,
+      $base_packages:
         ensure => present,
     }
     package {
-      'multilib_packages':
-        name => $ml_packages,
+      $ml_packages:
         ensure => present,
     }
    

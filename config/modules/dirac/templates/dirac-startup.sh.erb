@@ -1,0 +1,37 @@
+#!/bin/sh
+
+export PATH=/usr/bin:/usr/sbin:/bin:/sbin
+export X509_CERT_DIR=/etc/grid-security/certificates
+export X509_USER_CERT=/etc/grid-security/hostcert.pem
+export X509_USER_KEY=/etc/grid-security/hostkey.pem
+
+# Create a fake "proxy", this isn't actually needed, but it prevents a 
+# few spurious "proxy not found" errors...
+export X509_USER_PROXY=/etc/grid-security/hostproxy.pem
+touch "${X509_USER_PROXY}"
+chown dirac:dirac "${X509_USER_PROXY}"
+chmod 600 "${X509_USER_PROXY}"
+cat "${X509_USER_CERT}" "${X509_USER_KEY}" > "${X509_USER_PROXY}"
+
+# Now actually start dirac-agent.
+runuser -u dirac \
+  python dirac-pilot.py \
+    --cert \
+    --setup <%= @dirac_setup %> \
+    --release <%= @dirac_release %> \
+    --MaxCycles 1 \
+    --configurationServer <%= @dirac_cs %>
+    --Name <%= @dirac_ce %> \
+    --name <%= @dirac_site %> \
+    -o '/LocalSite/SubmitPool=<%= @dirac_pool %>' \
+    -o '/LocalSite/CPUTime=86400' \
+    -o '/LocalSite/MaxCPUTime=86400' \
+    -o '/LocalSite/CPUScalingFactor=8.8' \
+    -o '/LocalSite/CPUNormalizationFactor=8.8' \
+    -o "/DIRAC/Security/CertFile=${X509_USER_CERT}" \
+    -o "/DIRAC/Security/KeyFile=${X509_USER_KEY}"
+
+# Grace period before shutting down VM
+sleep 2m
+halt -p
+
