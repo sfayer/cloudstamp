@@ -62,7 +62,7 @@ class dirac($dirac_setup   = 'Unknown',
   }
   # Drop the dirac-startup script as /etc/rc.local.
   file {
-    '/etc/rc.local':
+    '/etc/rc.d/rc.local':
       ensure => present,
       owner => root,
       group => root,

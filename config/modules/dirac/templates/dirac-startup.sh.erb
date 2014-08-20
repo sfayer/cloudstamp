@@ -14,22 +14,25 @@ chmod 600 "${X509_USER_PROXY}"
 cat "${X509_USER_CERT}" "${X509_USER_KEY}" > "${X509_USER_PROXY}"
 
 # Now actually start dirac-agent.
-runuser -u dirac \
+pushd /home/dirac
+runuser -c ' \
   python dirac-pilot.py \
     --cert \
     --setup <%= @dirac_setup %> \
     --release <%= @dirac_release %> \
     --MaxCycles 1 \
-    --configurationServer <%= @dirac_cs %>
+    --configurationServer <%= @dirac_cs %> \
     --Name <%= @dirac_ce %> \
     --name <%= @dirac_site %> \
-    -o '/LocalSite/SubmitPool=<%= @dirac_pool %>' \
-    -o '/LocalSite/CPUTime=86400' \
-    -o '/LocalSite/MaxCPUTime=86400' \
-    -o '/LocalSite/CPUScalingFactor=8.8' \
-    -o '/LocalSite/CPUNormalizationFactor=8.8' \
+    -o "/LocalSite/SubmitPool=<%= @dirac_pool %>" \
+    -o "/LocalSite/CPUTime=86400" \
+    -o "/LocalSite/MaxCPUTime=86400" \
+    -o "/LocalSite/CPUScalingFactor=8.8" \
+    -o "/LocalSite/CPUNormalizationFactor=8.8" \
     -o "/DIRAC/Security/CertFile=${X509_USER_CERT}" \
-    -o "/DIRAC/Security/KeyFile=${X509_USER_KEY}"
+    -o "/DIRAC/Security/KeyFile=${X509_USER_KEY}" ' \
+  dirac
+popd
 
 # Grace period before shutting down VM
 sleep 2m
