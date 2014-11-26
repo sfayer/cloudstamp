@@ -66,11 +66,11 @@ echo "Verifying checksums..." >&2
 sha1sum -c << EOF
 957730e883af19dde3a615c542f3ec3751c18b03  boot/centos511_initrd.img
 c65aa075bd344099e0093bca21a481764f495c3a  boot/centos511_vmlinuz
-6d24806c2b4f9f7679ee803e68223965b71bcaf4  boot/centos66_initrd.img
+ecfb640c3ef9f04fa46f892300e850ef0203aaaf  boot/centos66_initrd.img
 ef0d91c733e2422c523b50b3718f7cb50bb0f023  boot/centos66_vmlinuz
 3b079e955553e5f1f766877ff87b9ef2052f1791  boot/sl66_initrd.img
 c682c7cac71f233bcb816c5ae68de8646a9f41e3  boot/sl66_vmlinuz
-e7fe8d12649dfcae456d977cd42ad1176ec9a2e0  boot/fedora20_initrd.img
+7165db4aedb5dcbb1436e9597c910508b2a002e3  boot/fedora20_initrd.img
 fb56dd066b7b2017b634b09f16736ee23f1e32cd  boot/fedora20_vmlinuz
 EOF
 
