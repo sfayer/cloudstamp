@@ -19,7 +19,7 @@ if [ ! -e boot/centos66_initrd.img ]; then
   mv boot/centos66_initrd.img.gz boot/centos66_initrd.img
 fi
 
-# Scientific Linux 6.i6 (LZMA)
+# Scientific Linux 6.6 (LZMA)
 if [ ! -e boot/sl66_vmlinuz ]; then
   wget -O boot/sl66_vmlinuz \
     "http://www.mirrorservice.org/sites/ftp.scientificlinux.org/linux/scientific/6/x86_64/os/images/pxeboot/vmlinuz"
