@@ -13,9 +13,17 @@ INST_MEM=2048
 # Find the tools
 QEMU_IMG_BIN=`which qemu-img`
 # Attempt to find a qemu version we can use
-if [ `which qemu-kvm 2>&-` -a -e "/dev/kvm" ]; then
-  QEMU_BIN=`which qemu-kvm`
+if [ -e "/dev/kvm" ]; then
+  # We have KVM support, try to find a matching qemu
+  if [ `which qemu-kvm 2>&-` ]; then
+    QEMU_BIN=`which qemu-kvm`
+  elif [ -x "/usr/libexec/qemu-kvm" ]; then
+    QEMU_BIN=/usr/libexec/qemu-kvm
+  else
+    QEMU_BIN=`which qemu-system-x86_64`
+  fi
 else
+  # No KVM support default to full emulation
   QEMU_BIN=`which qemu-system-x86_64`
 fi
 GZIP_BIN=`which gzip`
