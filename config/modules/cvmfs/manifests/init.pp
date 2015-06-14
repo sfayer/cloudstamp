@@ -28,16 +28,11 @@ class cvmfs($squid_list, $cms_site = 'NONE')
       ensure => present,
       require => Package['fuse'],
   }
-  # Install the packages from the repo
-  package {
-    'cvmfs-keys':
-      ensure => present,
-      require => Yumrepo['cvmfs'],
-  }
+  # Install the packages
   package {
     'cvmfs':
       ensure => present,
-      require => Package['cvmfs-keys'],
+      require => Yumrepo['cvmfs'],
   }
   # Add the squid server to the config
   file {
