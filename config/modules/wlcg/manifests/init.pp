@@ -24,7 +24,7 @@ class wlcg
   }
 
     package {
-      'HEP_OSlibs':
+      'HEP_OSlibs_SL6':
         ensure => present,
         require => Yumrepo['WLCG'],
     }
